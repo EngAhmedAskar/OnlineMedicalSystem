@@ -34,5 +34,6 @@ public class Appointment {
     @NotEmpty(message = "*Please provide description")
     private String description;
 
-    
+    @ManyToOne
+    private Clinic myClinic;
 }

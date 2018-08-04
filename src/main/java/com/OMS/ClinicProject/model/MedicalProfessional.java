@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "MedicalProfessional")
 public class MedicalProfessional {
-
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

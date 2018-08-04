@@ -34,4 +34,7 @@ public class Clinic {
 
     @ManyToMany
     private List<Speciality> SpecialityList;
+
+    @OneToMany(mappedBy = "myClinic")
+    List<Appointment> AppointmentList ;
 }

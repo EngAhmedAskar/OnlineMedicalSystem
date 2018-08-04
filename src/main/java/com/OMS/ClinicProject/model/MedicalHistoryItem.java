@@ -23,4 +23,8 @@ public class MedicalHistoryItem {
     @Column(name = "medicine")
     @NotEmpty(message = "*Please provide medicine")
     private String medicine;
+
+
+    @ManyToOne
+    private Patient myPatient;
 }

@@ -1,5 +1,7 @@
 package com.OMS.ClinicProject.model;
+
 import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,8 @@ public class Patient {
     @NotEmpty(message = "*Please provide email")
     private String email;
 
-    @OneToMany
-    @JoinTable(name = "MedicalHistoryItem")
-    List<MedicalHistoryItem> medicalHistoryItems ;
+
+    //    @JoinTable(name = "MedicalHistoryItem")
+    @OneToMany(mappedBy = "myPatient")
+    List<MedicalHistoryItem> medicalHistoryItems;
 }
