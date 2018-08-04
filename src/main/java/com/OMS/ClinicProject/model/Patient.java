@@ -47,4 +47,7 @@ public class Patient {
     //    @JoinTable(name = "MedicalHistoryItem")
     @OneToMany(mappedBy = "myPatient")
     List<MedicalHistoryItem> medicalHistoryItems;
+
+    @OneToMany(mappedBy = "myPatientAllergy")
+    List<Allergy> allergyList;
 }

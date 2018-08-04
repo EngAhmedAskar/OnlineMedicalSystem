@@ -16,4 +16,6 @@ public class Allergy {
     @NotEmpty(message = "*Please provide description")
     private String description;
 
+    @ManyToOne
+    private Patient myPatientAllergy;
 }
