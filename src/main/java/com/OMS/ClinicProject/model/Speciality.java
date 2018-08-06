@@ -62,6 +62,9 @@ public class Speciality {
         this.medicalProfessionals = medicalProfessionals;
     }
 
+    public Speciality() {
+    }
+
     public Speciality(@NotEmpty(message = "*Please provide name") String name, @NotEmpty(message = "*Please provide description") String description, List<Clinic> clinicList, List<MedicalProfessional> medicalProfessionals) {
         this.name = name;
         this.description = description;
