@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <th:block layout:fragment="header">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}" />
+    </th:block>
+
+    <th:block layout:fragment="content">
+
+        <h2>Allergy Info</h2> <br/>
+
+        <form class="form-horizontal" action="/Allergy" method="POST" th:object="${allergy}">
+            <input type="hidden" name="id" th:value="${allergy.id}" />
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="description">First name:</label>
+                <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                       class="validation-message"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="description" name="description"  th:field="*{description}">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+        </form>
+        <br/>
+
+        <a href="/allergies">Allergy List</a>
+    </th:block>
+
+    <th:block layout:fragment="footer">
+    </th:block>
+</body>
+</html>
