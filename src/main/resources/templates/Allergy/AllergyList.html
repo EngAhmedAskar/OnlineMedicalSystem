@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      xmlns:th="http://www.thymeleaf.org">
 <body>
+    <th:block layout:fragment="header">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}" />
+    </th:block>
+
+    <th:block layout:fragment="content">
+        <h2>Allergy List</h2> <br/>
+        <a href="/Allergy">Create an Allergy</a><br/>
+        <a href="/" id="linkBackHome" >Back to home</a><br/>
+        <table class="table table-striped">
+            <thead>
+            <th>Description</th>
+            <<th>Actions</th>
+            </thead>
+            <tbody>
+            <tr th:each="allergy : ${allergies}">
+                <td th:text="${allergy.description}"></td>
+                <td>
+                    <a th:href="@{'/Allergy/' + ${allergy.id}}">Edit</a>&nbsp;
+                    <a th:href="@{'/Allergy/delete/' + ${allergy.id}}">Delete</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </th:block>
+
+    <th:block layout:fragment="footer">
+    </th:block>
 
 </body>
 </html>

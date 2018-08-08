@@ -46,4 +46,7 @@ public class Appointment {
     @OneToOne
     @JoinColumn(name="timeSlot_id")
     private TimeSlot timeSlot;
+
+
+
 }
