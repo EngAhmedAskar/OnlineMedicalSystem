@@ -55,7 +55,7 @@ public class ClinicController {
             return "Clinic/AddClinic";
         }
         clinic = clinicService.save(clinic);
-        return "redirect:/Clinic";
+        return "redirect:/Clinics";
     }
 }
 

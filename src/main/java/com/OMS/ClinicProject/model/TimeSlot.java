@@ -13,20 +13,22 @@ public class TimeSlot {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "from")
+    @Column(name = "fromTime")
     @NotEmpty(message = "*Please provide from")
     private String from;
 
-    @Column(name = "to")
+    @Column(name = "toTime")
     @NotEmpty(message = "*Please provide to")
     private String to;
 
     public TimeSlot() {
     }
 
-    public TimeSlot(@NotEmpty(message = "*Please provide from") String from, @NotEmpty(message = "*Please provide to") String to) {
+
+    public TimeSlot(@NotEmpty(message = "*Please provide from") String from, @NotEmpty(message = "*Please provide to") String to, Appointment appointment) {
         this.from = from;
         this.to = to;
+        this.appointment = appointment;
     }
 
     public Long getId() {
@@ -52,4 +54,15 @@ public class TimeSlot {
     public void setTo(String to) {
         this.to = to;
     }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    @OneToOne(mappedBy =  "timeSlot")
+    private Appointment appointment;
 }

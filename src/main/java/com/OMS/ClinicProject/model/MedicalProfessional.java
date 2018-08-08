@@ -44,5 +44,5 @@ public class MedicalProfessional {
     private String passWord;
 
     @ManyToMany
-    private List<Speciality> rofessionalSpecialityList;
+    private List<Speciality> professionalSpecialityList;
 }

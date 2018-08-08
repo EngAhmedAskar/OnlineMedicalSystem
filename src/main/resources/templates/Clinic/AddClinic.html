@@ -27,7 +27,7 @@
             <label th:if="${#fields.hasErrors('SpecialityList')}" th:errors="*{SpecialityList}"
                    class="validation-message"></label>
             <div class="col-sm-10">
-                <select multiple th:field="*{SpecialityList}">
+                <select  th:field="*{SpecialityList}">
                     <option th:each="Speciality : ${SpecialityList}"
                             th:value="${Speciality.id}"
                             th:text="${Speciality.name}"></option>
@@ -75,7 +75,7 @@
     </form>
     <br/>
 
-    <a href="/clinics">clinic List</a>
+    <a href="/Clinics">clinic List</a>
 </th:block>
 
 <th:block layout:fragment="footer">
