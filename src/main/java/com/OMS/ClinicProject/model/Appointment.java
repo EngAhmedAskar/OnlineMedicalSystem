@@ -30,10 +30,20 @@ public class Appointment {
     @NotEmpty(message = "*Please provide medicine")
     private String medicine;
 
+
+    @Column(name = "status")
+    @NotEmpty(message = "*Please provide status")
+    private int status;
+
     @Column(name = "description")
     @NotEmpty(message = "*Please provide description")
     private String description;
 
     @ManyToOne
     private Clinic myClinic;
+
+
+    @OneToOne
+    @JoinColumn(name="timeSlot_id")
+    private TimeSlot timeSlot;
 }

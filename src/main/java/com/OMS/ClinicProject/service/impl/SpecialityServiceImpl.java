@@ -23,8 +23,8 @@ public class SpecialityServiceImpl implements SpecialityService {
     }
 
     @Override
-    public Speciality save(Speciality student) {
-        return SpecialityRepository.save(student);
+    public Speciality save(Speciality speciality) {
+        return SpecialityRepository.save(speciality);
     }
 
     @Override

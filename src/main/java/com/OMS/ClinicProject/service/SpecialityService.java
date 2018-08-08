@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface SpecialityService {
     List<Speciality> findAll();
-    Speciality save(Speciality student);
+    Speciality save(Speciality speciality);
     Speciality findOne(Long id);
     void delete(Long id);
 }
