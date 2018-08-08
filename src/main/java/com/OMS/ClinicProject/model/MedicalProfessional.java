@@ -45,7 +45,7 @@ public class MedicalProfessional {
 
     @ManyToMany
     private List<Speciality> professionalSpecialityList;
-<<<<<<< HEAD
+
 
     public MedicalProfessional() {
     }
@@ -132,6 +132,5 @@ public class MedicalProfessional {
     public void setProfessionalSpecialityList(List<Speciality> professionalSpecialityList) {
         this.professionalSpecialityList = professionalSpecialityList;
     }
-=======
->>>>>>> 0e745be523cb26c180544b229bb89de6402d58a1
+
 }
