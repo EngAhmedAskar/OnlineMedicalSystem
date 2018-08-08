@@ -41,4 +41,9 @@ public class Appointment {
 
     @ManyToOne
     private Clinic myClinic;
+
+
+    @OneToOne
+    @JoinColumn(name="timeSlot_id")
+    private TimeSlot timeSlot;
 }
