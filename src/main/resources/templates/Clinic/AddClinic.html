@@ -23,15 +23,12 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="SpecialityList">Speciality:</label>
+            <label class="control-label col-sm-2" >Speciality:</label>
             <label th:if="${#fields.hasErrors('SpecialityList')}" th:errors="*{SpecialityList}"
                    class="validation-message"></label>
             <div class="col-sm-10">
-<<<<<<< HEAD
-                <select th:field="*{SpecialityList}">
-=======
                 <select  th:field="*{SpecialityList}">
->>>>>>> 0e745be523cb26c180544b229bb89de6402d58a1
+
                     <option th:each="Speciality : ${SpecialityList}"
                             th:value="${Speciality.id}"
                             th:text="${Speciality.name}"></option>
