@@ -74,6 +74,6 @@ public class Speciality {
 
     @ManyToMany(mappedBy = "SpecialityList")
     private List<Clinic> ClinicList;
-    @ManyToMany(mappedBy = "rofessionalSpecialityList")
+    @ManyToMany(mappedBy = "professionalSpecialityList")
     private List<MedicalProfessional> medicalProfessionals;
 }
