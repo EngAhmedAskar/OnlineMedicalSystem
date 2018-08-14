@@ -46,11 +46,13 @@ public class MedicalProfessional {
     @ManyToMany
     private List<Speciality> professionalSpecialityList;
 
+    @OneToMany(mappedBy = "medicalProfessional")
+    List<Appointment> AppointmentList ;
 
     public MedicalProfessional() {
     }
 
-    public MedicalProfessional(@NotEmpty(message = "*Please provide name") String name, @NotEmpty(message = "*Please provide type") String type, @NotEmpty(message = "*Please provide mobile") String mobile, @NotEmpty(message = "*Please provide phone") String phone, @NotEmpty(message = "*Please provide credential") String credential, @NotEmpty(message = "*Please provide User Name") String userName, @NotEmpty(message = "*Please provide PassWord") String passWord, List<Speciality> rofessionalSpecialityList) {
+    public MedicalProfessional(@NotEmpty(message = "*Please provide name") String name, @NotEmpty(message = "*Please provide type") String type, @NotEmpty(message = "*Please provide mobile") String mobile, @NotEmpty(message = "*Please provide phone") String phone, @NotEmpty(message = "*Please provide credential") String credential, @NotEmpty(message = "*Please provide User Name") String userName, @NotEmpty(message = "*Please provide PassWord") String passWord, List<Speciality> professionalSpecialityList, List<Appointment> appointmentList) {
         this.name = name;
         this.type = type;
         this.mobile = mobile;
@@ -58,7 +60,8 @@ public class MedicalProfessional {
         this.credential = credential;
         this.userName = userName;
         this.passWord = passWord;
-        this.professionalSpecialityList = rofessionalSpecialityList;
+        this.professionalSpecialityList = professionalSpecialityList;
+        AppointmentList = appointmentList;
     }
 
     public Long getId() {
@@ -133,4 +136,11 @@ public class MedicalProfessional {
         this.professionalSpecialityList = professionalSpecialityList;
     }
 
+    public List<Appointment> getAppointmentList() {
+        return AppointmentList;
+    }
+
+    public void setAppointmentList(List<Appointment> appointmentList) {
+        AppointmentList = appointmentList;
+    }
 }

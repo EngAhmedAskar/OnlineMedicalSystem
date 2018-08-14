@@ -43,6 +43,8 @@ public class Patient {
     @NotEmpty(message = "*Please provide email")
     private String email;
 
+    @OneToMany(mappedBy = "patient")
+    List<Appointment> AppointmentList ;
 
     //    @JoinTable(name = "MedicalHistoryItem")
     @OneToMany(mappedBy = "myPatient")
@@ -50,4 +52,8 @@ public class Patient {
 
     @OneToMany(mappedBy = "myPatientAllergy")
     List<Allergy> allergyList;
+
+
+
+
 }

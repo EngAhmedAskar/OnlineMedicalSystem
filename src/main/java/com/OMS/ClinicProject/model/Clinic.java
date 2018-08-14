@@ -28,8 +28,7 @@ public class Clinic {
     @Column(name = "country")
     @NotEmpty(message = "*Please provide country")
     private String country;
-
-
+    
     @Column(name = "zipcode")
     @NotEmpty(message = "*Please provide zipcode")
     private String zipcode;
