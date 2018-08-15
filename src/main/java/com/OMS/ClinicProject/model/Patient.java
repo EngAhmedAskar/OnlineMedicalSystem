@@ -3,6 +3,7 @@ package com.OMS.ClinicProject.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,18 @@ public class Patient {
     @Column(name = "name")
     @NotEmpty(message = "*Please provide name")
     private String name;
+
+
+    @Column(name = "age")
+    @NotNull(message = "*Please provide age")
+    private int age;
+    @Column(name = "weight")
+    @NotNull(message = "*Please provide weight")
+    private int weight;
+
+    @Column(name = "height")
+    @NotNull(message = "*Please provide height")
+    private int height;
 
     @Column(name = "address")
     @NotEmpty(message = "*Please provide address")
