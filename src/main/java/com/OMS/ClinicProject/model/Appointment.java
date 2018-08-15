@@ -2,8 +2,10 @@ package com.OMS.ClinicProject.model;
 
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -14,25 +16,26 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "date")
-    @NotEmpty(message = "*Please provide date")
+    @Column(name = "appintmentdate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "*Please provide date")
     private LocalDate appintmentdate;
 
-    @Column(name = "time")
-    @NotEmpty(message = "*Please provide time")
-    private LocalTime time;
+//    @Column(name = "time")
+//    @NotEmpty(message = "*Please provide time")
+//    private LocalTime time;
 
     @Column(name = "diagnosis")
-    @NotEmpty(message = "*Please provide diagnosis")
+//    @NotEmpty(message = "*Please provide diagnosis")
     private String diagnosis;
 
     @Column(name = "medicine")
-    @NotEmpty(message = "*Please provide medicine")
+//    @NotEmpty(message = "*Please provide medicine")
     private String medicine;
 
 
     @Column(name = "status")
-    @NotEmpty(message = "*Please provide status")
+//    @NotEmpty(message = "*Please provide status")
     private int status;
 
     @Column(name = "description")
@@ -56,7 +59,7 @@ public class Appointment {
 
     public Appointment(@NotEmpty(message = "*Please provide date") LocalDate appintmentdate, @NotEmpty(message = "*Please provide time") LocalTime time, @NotEmpty(message = "*Please provide diagnosis") String diagnosis, @NotEmpty(message = "*Please provide medicine") String medicine, @NotEmpty(message = "*Please provide status") int status, @NotEmpty(message = "*Please provide description") String description, Clinic myClinic, Patient patient, MedicalProfessional medicalProfessional, TimeSlot timeSlot) {
         this.appintmentdate = appintmentdate;
-        this.time = time;
+       // this.time = time;
         this.diagnosis = diagnosis;
         this.medicine = medicine;
         this.status = status;
@@ -65,6 +68,10 @@ public class Appointment {
         this.patient = patient;
         this.medicalProfessional = medicalProfessional;
         this.timeSlot = timeSlot;
+    }
+
+    public Appointment() {
+
     }
 
     public Long getId() {
@@ -83,13 +90,13 @@ public class Appointment {
         this.appintmentdate = appintmentdate;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
+//    public LocalTime getTime() {
+//        return time;
+//    }
+//
+//    public void setTime(LocalTime time) {
+//        this.time = time;
+//    }
 
     public String getDiagnosis() {
         return diagnosis;

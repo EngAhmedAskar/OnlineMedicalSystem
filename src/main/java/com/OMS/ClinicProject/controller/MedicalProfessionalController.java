@@ -1,6 +1,10 @@
 package com.OMS.ClinicProject.controller;
+import com.OMS.ClinicProject.model.Appointment;
+import com.OMS.ClinicProject.model.MedicalHistoryItem;
 import com.OMS.ClinicProject.model.MedicalProfessional;
 import com.OMS.ClinicProject.model.Speciality;
+import com.OMS.ClinicProject.service.AppointmentService;
+import com.OMS.ClinicProject.service.MedicalHistoryItemService;
 import com.OMS.ClinicProject.service.MedicalProfessionalService;
 import com.OMS.ClinicProject.service.SpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,6 +30,10 @@ public class MedicalProfessionalController {
     private MedicalProfessionalService medicalProfessionalService;
     @Autowired
     private SpecialityService specialityService;
+    @Autowired
+    private MedicalHistoryItemService medicalHistoryItemService;
+    @Autowired
+    private AppointmentService appointmentService;
     @RequestMapping(value="/medicalProfessionals", method = RequestMethod.GET)
     public ModelAndView medicalProfessionals() {
         List<MedicalProfessional> medicalProfessionals = medicalProfessionalService.findAll();
@@ -64,5 +76,27 @@ public class MedicalProfessionalController {
     public String delete(@PathVariable Long id, Model model){
         medicalProfessionalService.delete(id);
         return "redirect:/medicalProfessionals";
+    }
+
+
+    @RequestMapping(value="/medicalProfessionalAppointment", method = RequestMethod.GET)
+    public ModelAndView medicalProfessionalAppointment() {
+           DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        LocalDate date = LocalDate.now();
+        List<Appointment> Appointments = appointmentService.findAllappointment(Long.valueOf(1),0,date );
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("Appointments", Appointments);
+        modelAndView.setViewName("medicalProfessional/MedicalProfessionalAppointment");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value="/AppointmentDetails/{id}", method = RequestMethod.GET)
+    public String AppointmentDetail(@PathVariable Long id, Model model){
+        Appointment appointment = appointmentService.findOne(id);
+        model.addAttribute("appointment",appointment );
+        List<MedicalHistoryItem> medicalHistoryItems = medicalHistoryItemService.findByPatientID(appointment.getPatient().getId());
+        model.addAttribute("medicalHistoryItems", medicalHistoryItems);
+        return "Appointment/AppointmentDetails";
     }
 }

@@ -7,6 +7,8 @@ import com.OMS.ClinicProject.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service("AppointmentService")
@@ -35,5 +37,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public void delete(Long id) {
         appointmentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Appointment> findAllappointment(Long id, int status, LocalDate appointmentDate) {
+        return appointmentRepository.findByDate(id,status,appointmentDate);
     }
 }

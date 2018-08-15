@@ -28,7 +28,7 @@ public class Clinic {
     @Column(name = "country")
     @NotEmpty(message = "*Please provide country")
     private String country;
-    
+
     @Column(name = "zipcode")
     @NotEmpty(message = "*Please provide zipcode")
     private String zipcode;
@@ -39,6 +39,9 @@ public class Clinic {
 
     @OneToMany(mappedBy = "myClinic")
     List<Appointment> AppointmentList ;
+
+    @OneToMany(mappedBy = "medicalProfessionalClinic")
+    List<MedicalProfessional> medicalProfessionals;
 
     public Long getId() {
         return id;
@@ -105,6 +108,14 @@ public class Clinic {
     }
 
     public Clinic() {
+    }
+
+    public List<MedicalProfessional> getMedicalProfessionals() {
+        return medicalProfessionals;
+    }
+
+    public void setMedicalProfessionals(List<MedicalProfessional> medicalProfessionals) {
+        this.medicalProfessionals = medicalProfessionals;
     }
 
     public Clinic(@NotEmpty(message = "*Please provide address") String address, @NotEmpty(message = "*Please provide name") String name, @NotEmpty(message = "*Please provide city") String city, @NotEmpty(message = "*Please provide country") String country, @NotEmpty(message = "*Please provide zipcode") String zipcode, List<Speciality> specialityList, List<Appointment> appointmentList) {

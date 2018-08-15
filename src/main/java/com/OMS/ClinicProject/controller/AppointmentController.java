@@ -1,12 +1,7 @@
 package com.OMS.ClinicProject.controller;
 
-
-import com.OMS.ClinicProject.model.Appointment;
-import com.OMS.ClinicProject.model.Clinic;
-import com.OMS.ClinicProject.model.Speciality;
-import com.OMS.ClinicProject.service.AppointmentService;
-import com.OMS.ClinicProject.service.ClinicService;
-import com.OMS.ClinicProject.service.SpecialityService;
+import com.OMS.ClinicProject.model.*;
+import com.OMS.ClinicProject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.List;
 
+
 @Controller
 public class AppointmentController {
 
@@ -29,7 +25,14 @@ public class AppointmentController {
     private SpecialityService specialityService;
     @Autowired
     private ClinicService clinicService;
-    @RequestMapping(value="/appointments", method = RequestMethod.GET)
+    @Autowired
+    private TimeSlotService timeSlotService;
+
+
+    @Autowired
+    private MedicalProfessionalService medicalProfessionalService;
+
+    @RequestMapping(value = "/appointments", method = RequestMethod.GET)
     public ModelAndView allergies() {
         List<Appointment> allergies = appointmentService.findAll();
         ModelAndView modelAndView = new ModelAndView();
@@ -39,26 +42,39 @@ public class AppointmentController {
     }
 
 
-    @RequestMapping(value="/AddClinic", method = RequestMethod.GET)
-    public String create(Model model){
-        model.addAttribute("Clinic", new Clinic());
+    @RequestMapping(value = "/AddAppointment", method = RequestMethod.GET)
+    public String create(Model model) {
+        model.addAttribute("Appointment", new Appointment());
         List<Speciality> Specialities = specialityService.findAll();
         model.addAttribute("SpecialityList", Specialities);
-        return "Clinic/AddClinic";
+        List<TimeSlot> timeSlots = timeSlotService.findAll();
+        model.addAttribute("timeSlots", timeSlots);
+
+        List<Clinic> ClinicList = clinicService.findAll();
+        model.addAttribute("ClinicList", ClinicList);
+
+        List<MedicalProfessional> medicalProfessionals = medicalProfessionalService.findAll();
+        model.addAttribute("medicalProfessionals", medicalProfessionals);
+        return "Appointment/AddAppointment";
     }
 
 
-    @RequestMapping(value = "/AddClinic", method = RequestMethod.POST)
-    public String edit(@Valid @ModelAttribute("Clinic") Clinic clinic,
-                       BindingResult result, Model model)  {
+    @RequestMapping(value = "/AddAppointment", method = RequestMethod.POST)
+    public String edit(@Valid @ModelAttribute("Appointment") Appointment appointment,
+                       BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             model.addAttribute("errors", result.getAllErrors());
             List<Speciality> Specialities = specialityService.findAll();
             model.addAttribute("SpecialityList", Specialities);
-            return "Clinic/AddClinic";
+            return "Appointment/AddAppointment";
         }
-        clinic = clinicService.save(clinic);
+        appointment.setStatus((int) Status.Reserved.getValue());
+        Patient p = new Patient();
+
+        p.setId(Long.valueOf(1));
+        appointment.setPatient(p);
+        appointment = appointmentService.save(appointment);
         return "redirect:/Clinics";
     }
 }

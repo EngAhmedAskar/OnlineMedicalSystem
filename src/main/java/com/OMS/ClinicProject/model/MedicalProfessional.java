@@ -48,7 +48,8 @@ public class MedicalProfessional {
 
     @OneToMany(mappedBy = "medicalProfessional")
     List<Appointment> AppointmentList ;
-
+    @ManyToOne
+    private Clinic medicalProfessionalClinic;
     public MedicalProfessional() {
     }
 
@@ -62,6 +63,14 @@ public class MedicalProfessional {
         this.passWord = passWord;
         this.professionalSpecialityList = professionalSpecialityList;
         AppointmentList = appointmentList;
+    }
+
+    public Clinic getMedicalProfessionalClinic() {
+        return medicalProfessionalClinic;
+    }
+
+    public void setMedicalProfessionalClinic(Clinic medicalProfessionalClinic) {
+        this.medicalProfessionalClinic = medicalProfessionalClinic;
     }
 
     public Long getId() {

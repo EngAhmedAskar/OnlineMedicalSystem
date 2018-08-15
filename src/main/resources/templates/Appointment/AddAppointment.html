@@ -1,0 +1,129 @@
+<!DOCTYPE html >
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="shared/homelayout"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block layout:fragment="header">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}" />
+</th:block>
+
+<th:block layout:fragment="content">
+
+    <h2>Appointment Info</h2> <br/>
+
+    <form class="form-horizontal" action="/AddAppointment" method="POST" th:object="${Appointment}">
+        <input type="hidden" name="id" th:value="${Appointment.id}" />
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Speciality:</label>
+            <label
+                   class="validation-message"></label>
+            <div class="col-sm-10">
+                <select  >
+
+                    <option th:each="Speciality : ${SpecialityList}"
+                            th:value="${Speciality.id}"
+                            th:text="${Speciality.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Clinic:</label>
+            <label th:if="${#fields.hasErrors('myClinic.id')}" th:errors="*{myClinic.id}"
+                    class="validation-message"></label>
+            <div class="col-sm-10">
+                <select th:field="*{myClinic.id}" >
+
+                    <option th:each="Clinic : ${ClinicList}"
+                            th:value="${Clinic.id}"
+                            th:text="${Clinic.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Medical Professional:</label>
+            <label th:if="${#fields.hasErrors('medicalProfessional.id')}" th:errors="*{medicalProfessional.id}"
+                   class="validation-message"></label>
+            <div class="col-sm-10">
+                <select  th:field="*{medicalProfessional.id}">
+
+                    <option th:each="medicalProfessional : ${medicalProfessionals}"
+                            th:value="${medicalProfessional.id}"
+                            th:text="${medicalProfessional.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+        <label class="control-label col-sm-2" for="appintmentdate"> Name:</label>
+        <label th:if="${#fields.hasErrors('appintmentdate')}" th:errors="*{appintmentdate}"
+        class="validation-message"></label>
+        <div class="col-sm-10">
+        <input type="date" class="form-control" id="appintmentdate" name="appintmentdate"  th:field="*{appintmentdate}">
+        </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Time:</label>
+            <label th:if="${#fields.hasErrors('timeSlot.id')}" th:errors="*{timeSlot.id}"
+                   class="validation-message"></label>
+            <div class="col-sm-10">
+                <select  th:field="*{timeSlot.id}">
+
+                    <option th:each="timeSlot : ${timeSlots}"
+                            th:value="${timeSlot.id}"
+                            th:text= "' from ' + ${timeSlot.from} +' to ' +${timeSlot.to}"></option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="description">description:</label>
+            <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                   class="validation-message"></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" name="description"  th:value="${Appointment.description}">
+            </div>
+        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="control-label col-sm-2" for="country">Country:</label>-->
+            <!--<label th:if="${#fields.hasErrors('country')}" th:errors="*{country}"-->
+                   <!--class="validation-message"></label>-->
+            <!--<div class="col-sm-10">-->
+                <!--<input type="text" class="form-control" id="country" name="country"  th:value="${Appointment.country}">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label col-sm-2" for="city">City:</label>-->
+            <!--<label th:if="${#fields.hasErrors('city')}" th:errors="*{city}"-->
+                   <!--class="validation-message"></label>-->
+            <!--<div class="col-sm-10">-->
+                <!--<input type="text" class="form-control" id="city" name="city"  th:value="${Appointment.city}">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label col-sm-2" for="zipcode">ZipCode:</label>-->
+            <!--<label th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}"-->
+                   <!--class="validation-message"></label>-->
+            <!--<div class="col-sm-10">-->
+                <!--<input type="text" class="form-control" id="zipcode" name="zipcode"  th:value="${Appointment.zipcode}">-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
+    <br/>
+
+    <a href="/Appointments">Appointment List</a>
+</th:block>
+
+<th:block layout:fragment="footer">
+</th:block>
+
+</body>
+</html>

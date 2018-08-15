@@ -43,6 +43,6 @@ public class Allergy {
     public Allergy(@NotEmpty(message = "*Please provide description") String description){
         this.description = description;
     }
-    @ManyToOne
-    private Patient myPatientAllergy;
+    @ManyToMany
+    private List<Patient> myPatientAllergy;
 }
