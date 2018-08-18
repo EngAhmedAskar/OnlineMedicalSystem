@@ -9,19 +9,20 @@
 
 <th:block layout:fragment="content">
     <h2>Appointment List</h2> <br/>
-    <a href="/Appointment">Create an Appointment</a><br/>
-    <a href="/" id="linkBackHome" >Back to home</a><br/>
+    <a href="/Appointment">Create an Appointment</a> <br/>
+    <a href="/" id="linkBackHome" >Back to home </a> <br/>
+
     <table class="table table-striped">
         <thead>
         <th>Description</th>
-        <<th>Actions</th>
+        <th>Actions</th>
         </thead>
         <tbody>
         <tr th:each="Appointment : ${Appointments}">
             <td th:text="${Appointment.description}"></td>
             <td>
-                <a th:href="@{'/AppointmentDetails/' + ${Appointment.id}}">Edit</a>&nbsp;
-                <a th:href="@{'/Appointment/delete/' + ${Appointment.id}}">Delete</a>
+                <a th:href="@{'/AppointmentDetails/' + ${Appointment.id}}">Appointment Details</a>&nbsp;
+                <!--<a th:href="@{'/Appointment/delete/' + ${Appointment.id}}">Delete</a>-->
             </td>
 
         </tr>

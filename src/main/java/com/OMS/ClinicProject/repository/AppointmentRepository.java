@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-@Repository
+
 public interface AppointmentRepository  extends JpaRepository<Appointment, Long> {
 
     @Query(value = "SELECT a FROM Appointment a where a.medicalProfessional.id=?1 and a.status = ?2 and a.appintmentdate=?3")

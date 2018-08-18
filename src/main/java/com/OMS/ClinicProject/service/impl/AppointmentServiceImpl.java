@@ -31,7 +31,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Appointment findOne(Long id) {
-        return appointmentRepository.getOne(id);
+        return appointmentRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -41,6 +41,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<Appointment> findAllappointment(Long id, int status, LocalDate appointmentDate) {
-        return appointmentRepository.findByDate(id,status,appointmentDate);
+        return appointmentRepository.findByDate(id, status, appointmentDate);
     }
 }

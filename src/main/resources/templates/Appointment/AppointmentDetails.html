@@ -4,23 +4,89 @@
       xmlns:th="http://www.thymeleaf.org">
 <body>
 <th:block layout:fragment="header">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}"/>
 </th:block>
 
 <th:block layout:fragment="content">
     <h2>Medical History</h2> <br/>
-    <a href="/" id="linkBackHome" >Back to home</a><br/>
-    <table class="table table-striped">
-        <thead>
-        <th>Description</th>
-        <<th>Actions</th>
-        </thead>
-        <tbody>
-        <tr th:each="allergy : ${allergies}">
-            <td th:text="${allergy.description}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <a href="/" id="linkBackHome">Back to home</a><br/>
+    <div>
+        <fieldset>
+            <legend>Patient Data</legend>
+            Name:
+            <th:label th:text="${appointment.patient.name}"/>
+            <br>
+            Age:
+            <th:label th:text="${appointment.patient.age}"/>
+            <br>
+            Weight:
+            <th:label th:text="${appointment.patient.weight}"/>
+            <br>
+            Height:
+            <th:label th:text="${appointment.patient.height}"/>
+            <br>
+        </fieldset>
+    </div>
+
+
+    <div>
+        <fieldset>
+            <legend>Patient Medical History</legend>
+            <th:label th:text="${msg}"/>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <th>Description</th>
+
+                <th>Diagnosis</th>
+                <th>Medicine</th>
+                </thead>
+                <tbody>
+                <tr th:each="medicalHistoryItem : ${medicalHistoryItems}">
+                    <td th:text="${medicalHistoryItem.description}"></td>
+                    <td th:text="${medicalHistoryItem.diagnosis}"></td>
+                    <td th:text="${medicalHistoryItem.medicine}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+
+    <form class="form-horizontal" action="/AppointmentDetails" method="POST" th:object="${appointment}">
+        <input type="hidden" name="id" th:value="${appointment.id}" />
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="description"> Description:</label>
+            <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                   class="validation-message"></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" name="description"  th:field="*{description}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="diagnosis">Diagnosis:</label>
+            <label th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}"
+                   class="validation-message"></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="diagnosis" name="diagnosis"  th:field="*{diagnosis}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="medicine">Medicine:</label>
+            <label th:if="${#fields.hasErrors('medicine')}" th:errors="*{medicine}"
+                   class="validation-message"></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="medicine" name="medicine"  th:field="*{medicine}">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
 </th:block>
 
 <th:block layout:fragment="footer">
